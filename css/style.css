@@ -34,7 +34,7 @@ html {
 
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: #03090a; #
+  background-color: #000507; #
 }
 
 body {
@@ -57,7 +57,7 @@ body {
 }
 
 body.sub_page {
-  background-color: #03090a; /* Defina a cor de fundo desejada */
+  background-color: #000507; /* Defina a cor de fundo desejada */
 }
 
 .layout_padding {
@@ -184,7 +184,7 @@ a:focus {
   max-width: 100%;
 }
 .navbar-brand img {
-  width: 25px;
+  width: 45px;
   margin-right: 7px;
 }
 
@@ -278,7 +278,7 @@ a:focus {
 .hero_detail-box p {
   margin-top: 20px;
   margin-bottom: 35px;
-  color: #bee6fe;
+  color: #bef0fe;
 }
 
 .hero_img-container {
@@ -309,7 +309,7 @@ a:focus {
 .common_style p {
   font-weight: 600;
   color: #ffffff;
-  margin: 30px 0 50px 0;
+  margin: 30px 0 30px 0;
 }
 
 .common_style img {
@@ -779,6 +779,7 @@ a:focus {
   color: #000000;
   font-weight: 600;
   transition: all 0.3s ease 0s;
+  
 }
 
 
@@ -802,7 +803,7 @@ a:focus {
 
 .call_to-btn:hover {
   background-color: #00ecff; 
-  transform: translateY(-7px); /* Adicione a flutuação apenas no estado hover */
+  transform: scale(1.05); /* Use scale para dar a ilusão de movimento sem alterar a posição real */
 }
 
 .call_to-btn:hover,
@@ -810,7 +811,7 @@ a:focus {
   -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
-  transform: translateY(-7px);
+  transform: scale(1.05); /* Use scale para dar a ilusão de movimento sem alterar a posição real */
 }
 
 
@@ -867,7 +868,7 @@ a:focus {
   color: #fff; /* Cor do texto */
 }
 .minigame-detail-box p {
-  color: #bee6fe; /* Cor do texto */
+  color: #bef0fe; /* Cor do texto */
 }
 
 .minigame-2,
@@ -896,6 +897,17 @@ a:focus {
   position: relative;
 }
 
+.minigames-text h4{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-weight: bold;
+  font-size: 35px;
+  margin: 15px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #bef0fe; /* Cor dos ícones em branco */
+}
+
 .minigame-image img {
   border-radius: 15px; /* Bordas arredondadas */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
@@ -907,7 +919,7 @@ a:focus {
 
 .minigames_section {
   margin-top: 20px;
-  background-color: #00060a; /* Cor de fundo meio opaca (#0f0f0f com 50% de transparência) */
+  background-color: #000507; /* Cor de fundo meio opaca (#0f0f0f com 50% de transparência) */
   padding: 40px; /* Espaçamento interno */
   box-shadow: 0px 0px 60px #000000; /* Sombra */
 }
@@ -982,7 +994,7 @@ a:focus {
 
 /* Estilos para a seção de redes sociais */
 .social-section {
-    background-color: #030708; /* Cor de fundo escura */
+    background-color: #000507; /* Cor de fundo escura */
     padding: 20px;
     box-shadow: 0 0 15px #000000; /* Sombra */
     border-radius: 15px;
@@ -997,13 +1009,8 @@ a:focus {
 }
 
 
-.social-column:hover {
-    border: 1.5px solid #00ecff; /* Borda com tom mais escuro */
-    transition: border 1s; 
-}
-
 .social-column {
-    background-color: #080e11; /* Cor de fundo mais escura */
+    background-color: #00070a; /* Cor de fundo mais escura */
     border-radius: 8px; /* Cantos semi-arredondados */
     padding: 10px;
     width: 255px; /* Largura da coluna */
@@ -1012,8 +1019,13 @@ a:focus {
     height: 330px;
     text-align: center;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra */
-    border: 1.2px solid #1c1c1c; /* Borda com tom mais escuro */
+    border: 1.2px solid #bef0fe; /* Borda com tom mais escuro */
     font-family: 'Nunito', sans-serif;
+    transition: border 1s; /* Adicionando a transição ao estado normal */
+}
+
+.social-column:hover {
+    border: 1.5px solid #00ecff; /* Borda com tom mais escuro */
 }
 
 .social-icon {
@@ -1040,22 +1052,16 @@ a:focus {
 
 
 .social-text h4{
-  padding-top: 100px;
-  font-weight: bold;
-  font-size: 50px;
-  margin: 24px;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  color: #ffffff; /* Cor dos ícones em branco */
-}
-.minigames-text h4{
   padding-top: 50px;
+  padding-bottom: 50px;
+  font-weight: bold;
   font-size: 35px;
   margin: 15px;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  color: #bee6fe; /* Cor dos ícones em branco */
+  color: #bef0fe; /* Cor dos ícones em branco */
 }
+
 
 @media (max-width: 768px) {
     .social-section {
@@ -1071,8 +1077,6 @@ a:focus {
 
 /* HUB PLUGINS */
 
-
-
 .hub-container {
   display: flex;
   justify-content: center;
@@ -1086,31 +1090,21 @@ a:focus {
   gap: 20px;
 }
 
-.hub-button {
-  padding: 20px 40px;
-  font-weight: bold;
-  font-family: 'Poppins', sans-serif;
-  font-size: 3.0rem;
-  color: #000;
-  background-color: #00ecff;
-  border: none;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.hub-button:hover {
-  background-color: #0056b3;
-  transition: all 0.3s ease 0.3s;
-  background-color: #00ecf0; 
-  transform: translateY(-4px); /* Adicione a flutuação apenas no estado hover */
-}
-
-
-
-.hub-buttons {
+.hub-button-container {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hub-image {
+  width: 500px; /* Ajuste o tamanho da imagem conforme necessário */
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hub-image:hover {
+  transform: scale(1.05);
+  animation: shake 2s ease-in-out infinite;
 }
 
 .hub-button {
@@ -1121,10 +1115,10 @@ a:focus {
   color: #fff;
   background: linear-gradient(45deg, #00ecff, #00b3ff);
   border: none;
-  border-radius: 20px;
+  border-radius: 50px;
   text-decoration: none;
   transition: transform 0.3s ease, background 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
   position: relative;
   overflow: hidden;
 }
@@ -1148,5 +1142,66 @@ a:focus {
 .hub-button:hover {
   background: linear-gradient(45deg, #00b3ff, #00ecff);
   transform: translateY(-4px);
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-5px); }
+  50% { transform: translateY(5px); }
+  75% { transform: translateY(-5px); }
+}
+
+
+.all-btn {
+  position: relative;
+  display: inline-block;
+  padding: 15px 45px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  background: linear-gradient(45deg, #00ecff, #00b3ff);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+.all-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75px;
+  width: 50px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-15deg);
+  transition: left 0.5s ease;
+}
+
+.all-btn:hover::before {
+  left: 100%;
+}
+
+.all-btn:hover {
+  background: linear-gradient(45deg, #00b3ff, #00ecff);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05); /* Use scale para dar a ilusão de movimento sem alterar a posição real */
+}
+
+.all-btn:hover,
+.all-btn_on-hover:hover {
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+}
+
+.all-btn img {
+  width: 18px;
+  margin-left: 10px;
+}
+
+.all_on-hover {
+  transition: all 0.3s ease 0s;
 }
