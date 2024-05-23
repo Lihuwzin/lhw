@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Timelly.net</title>
+  <title>Timelly.net - [ Home ] </title>
   <!-- Favicon para navegadores da web (32x32 pixels) -->
   <link rel="ico" type="image/png" sizes="48x48" href="../images/favicon.ico">
   <!-- Favicon para navegadores da web (32x32 pixels) -->
@@ -59,7 +59,7 @@
       console.log("Página carregada. Iniciando rolagem automática..");
       setTimeout(function () {
         window.scrollTo(0, 0);
-      }, 400); // Ajuste o valor do delay conforme necessário (em milissegundos)
+      }, 10); // Ajuste o valor do delay conforme necessário (em milissegundos)
     };
   </script>
   <script>
@@ -67,7 +67,15 @@
       console.log("Página carregada. Iniciando rolagem automática...");
       setTimeout(function () {
         window.scrollTo(0, 0);
-      }, 600); // Ajuste o valor do delay conforme necessário (em milissegundos)
+      }, 30); // Ajuste o valor do delay conforme necessário (em milissegundos)
+    };
+  </script>
+  <script>
+    window.onload = function () {
+      console.log("Página carregada. Iniciando rolagem automática...");
+      setTimeout(function () {
+        window.scrollTo(0, 0);
+      }, 100); // Ajuste o valor do delay conforme necessário (em milissegundos)
     };
   </script>
 
@@ -136,11 +144,12 @@
             "Timelly.net, um lugar de novas promessas." - Aqui, os mais experientes escolhem jogar, onde os melhores
             deixam sua marca.
           </p>
-          <div class="hero_btn-continer">
-            <a href="#minigames" class="call_to-btn btn_white-border">
-              Ler Mais
-            </a>
-          </div>
+			<div class="hero_btn-container">
+			  <a href="#minigames-text" class="all-btn btn_white-border">
+				Ler Mais
+			  </a>
+			</div>
+
         </div>
         <div class="hero_img-container">
           <div>
@@ -368,7 +377,7 @@
               cargos relacionados à Criação de Conteúdo e/ou VIPs.
             </p>
             <div class="">
-              <a href="" class="call_to-btn btn_white-border">
+              <a href="" class="all-btn btn_white-border">
                 Ler mais
               </a>
             </div>
@@ -394,16 +403,17 @@
   </section>
   <!-- footer section -->
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelector('.call_to-btn').addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetSection = document.querySelector('#minigames');
-        const yOffset = targetSection.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({top: yOffset, behavior: 'smooth'});
-      });
-    });
-  </script>
+	<script>
+	  document.addEventListener('DOMContentLoaded', function () {
+		document.querySelector('.all-btn').addEventListener('click', function (e) {
+		  e.preventDefault();
+		  const targetSection = document.querySelector('.minigames-text');
+		  const yOffset = targetSection.getBoundingClientRect().top + window.pageYOffset;
+		  window.scrollTo({ top: yOffset, behavior: 'smooth' });
+		});
+	  });
+	</script>
+
 
 
   <script>
