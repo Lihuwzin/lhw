@@ -1,69 +1,1070 @@
+/* Defina um tamanho mínimo para o corpo da página para evitar redimensionamentos inesperados */
 body {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  min-width: 1000px; /* Defina o valor mínimo de largura do corpo */
 }
 
-header {
+/* Evite que imagens ou outros elementos redimensionem a página */
+img, video, iframe {
+  max-width: 100%; /* Garanta que esses elementos não ultrapassem o tamanho do contêiner pai */
+  height: auto; /* Mantenha a proporção de aspecto original para imagens, vídeos e iframes */
+}
+
+/* Evite margens e preenchimentos indesejados que possam causar movimentos */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Evite que barras de rolagem horizontais apareçam */
+html {
+  overflow-x: hidden;
+}
+
+/* Defina um tamanho mínimo para os elementos que não devem ser redimensionados */
+.container {
+  min-width: 1000px; /* Defina o valor mínimo de largura para os contêineres que deseja manter fixos */
+}
+
+
+
+
+
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #09030A; #
+}
+
+body {
+  max-width: 100%; /* Defina a largura máxima para ocupar toda a largura da janela */
+  overflow-x: hidden; /* Oculte a barra de rolagem horizontal se necessário */
+}
+
+/* Exemplo: Remova margens e preenchimentos do corpo do site */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body.sub_page {
+  background-color: #09030A; /* Defina a cor de fundo desejada */
+}
+
+.layout_padding {
+  padding: 75px 0;
+}
+
+.layout_padding2 {
+  padding: 45px 0;
+}
+
+.layout_padding2-top {
+  padding-top: 45px;
+}
+
+.layout_padding-top {
+  padding-top: 75px;
+}
+
+.layout_padding-bottom {
+  padding-bottom: 75px;
+}
+
+.main-heading {
+  color: #d400ff;
+  font-weight: bold;
+  text-align: center;
+  z-index: 9999; /* Defina um valor menor que a tela de carregamento */
+}
+
+/*header section*/
+
+.header_section {
+  position: relative;
+  z-index: 9998; /* Defina um valor menor que o z-index do background-overlay */
+  /* Resto do seu estilo de cabeçalho */
+}
+
+.header_section {
+  padding-top: 10px;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+nav.navbar.navbar-expand-lg {
+
+  padding: 10px 0;
+}
+
+.custom_nav-container.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 10px 20px;
+  color: #f7f6f7;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s; 
+}
+
+.custom_nav-container.navbar-expand-lg .navbar-nav .nav-link:hover {
+  color: #d400ff; 
+  transform: translateY(-3px); /* Adicione a flutuação apenas no estado hover */
+}
+
+.custom_nav-container.navbar-expand-lg .navbar-nav .nav-link:hover {
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  transform: translateY(-3px);
+}
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: initial;
+}
+
+.btn,
+.btn:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.top_container {
+  position: relative;
+}
+
+
+.top_container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(../images/hero-bg.png);
+  background-size: 100% 100%;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.sub_page .top_container::before {
+  background-color: #030203;
+  background-image: none;
+}
+
+.sub_page .header_section {
+  box-shadow: 0px 0px 50px #000000, 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sub_page .top_container::after {
+  display: none;
+}
+
+.sub_page .container-fluid  {
+  margin-top: 220px;
+}
+.sub_page .pix  {
+  margin-left: 35px;
+  max-height: 700px;
+  margin-top: 19px;
+  width: auto;
+  max-width: 100%;
+}
+.navbar-brand img {
+  width: 25px;
+  margin-right: 7px;
+}
+
+
+.custom_nav-container .nav_search-btn {
+  background-image: url(../images/search-icon.png);
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position-y: 7px;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: none;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand span {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fefefe;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s; 
+}
+
+.navbar-brand span:hover {
+  color: #d400ff; 
+  transform: translateY(-6px); /* Adicione a flutuação apenas no estado hover */
+}
+
+.navbar-brand span:hover {
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  transform: translateY(-4px);
+}
+
+.custom_nav-container {
+  z-index: 99999;
+  padding: 15px 0;
+}
+
+.custom_nav-container .navbar-toggler {
+  outline: none;
+}
+
+.custom_nav-container .navbar-toggler .navbar-toggler-icon {
+  background-image: url(../images/menu.png);
+  background-size: 40px;
+}
+
+/*end header section*/
+
+/* hero section */
+.hero-container {
+  display: flex;
+  padding-top: 90px;
+  padding-bottom: 325px;
+}
+
+.hero_detail-box {
+  width: 40%;
+}
+
+.hero_img-container {
+  width: 68%;
+  margin-right: -8%;
+  margin-top: -5%;
+}
+
+
+.hero_img-container img {
+  width: 100%;
+}
+
+.hero_detail-box {
+  color: #fefeff;
+}
+
+.hero_detail-box h1 {
+  font-size: 40px;
+  color: #fefeff;
+  font-weight: 600;
+  width: 70%;
+  margin-top: 100px;
+}
+
+
+.hero_detail-box p {
+  margin-top: 20px;
+  margin-bottom: 35px;
+  color: #f4befe;
+}
+
+.hero_img-container {
+  content: "";
+  display: flex;
+}
+
+.hero_detail-box h1{
+  width: 120%;
+  font-size: 50px;
+}
+/* end hero section */
+
+/* common style for some sections */
+.common_style>section {
+  padding: 50px 0;
+}
+
+.common_style .row {
+  align-items: center;
+}
+
+.common_style h3 {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.common_style p {
+  font-weight: 600;
+  color: #ffffff;
+  margin: 30px 0 50px 0;
+}
+
+.common_style img {
+  width: auto;
+}
+
+
+/* end common style */
+/* discord section */
+.discord_section {
+  background-color: #5865F2; /* Cor azul semelhante ao Discord */
+  padding: 70px; /* Espaçamento interno para a borda arredondada */
+  margin-top: -100px; 
+  margin-bottom: 60;
+  position: relative;
+  box-shadow: none; /* Remova a sombra */
+}
+.discord_section .icon {
+  position: absolute;
+  z-index: 1; /* Coloque um índice z negativo para o ícone ficar atrás do texto */
+  left: -100%;
+}
+
+.discord_section .icon i {
+  font-size: 380px;
+  color: #4752cd;
+  position: absolute; /* Garanta que o ícone absoluto fique no lugar certo */
+  z-index: 1; /* Outra camada de índice z negativo para garantir que o ícone fique atrás do texto */
+}
+/* Estilos para o título e texto dentro da seção (ajuste conforme necessário) */
+.discord_section h3,
+.discord_section p {
+  color: #fff; /* Cor do texto */
+}
+
+.discord_section p {
+  margin-top: 50px;
+  font-size: 20px;
+}
+.discord_section h3{
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.discord_detail-box h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.discord_detail-box a {
+  color: #000000;
+}
+
+.discord_section a {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.discord_section a:hover {
+  background-color: #cccccc;
+}
+
+/* Adicione esta regra ao seu CSS para ajustar a altura do widget */
+.widget-container iframe {
+  height: 350px; /* Ajuste conforme necessário */
+
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Estilos para o ícone do Discord */
+.discord-button i {
+  margin-right: 10px; /* Espaço entre o ícone e o texto do botão */
+}
+
+/* end discord section */
+
+/* client section */
+.client_section h2,
+.client_section h5,
+.client_section p {
+  font-weight: 600;
+}
+
+.client_section h2 {
+  text-align: center;
+}
+
+
+.client_section h5 {
+  font-size: 24px;
+  color: #d400ff;
+}
+
+.client_section .row {
+  align-items: center;
+  padding: 75px 0;
+  margin: 0 15px;
+}
+
+.client_section img {
+  width: 100%;
+}
+
+
+.client_detail-box h5 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  color: #d400ff;
+  white-space: normal; /* Define o comportamento padrão de quebra de linha */
+}
+
+.client_section .carousel-indicators {
+  margin: 0;
+  justify-content: flex-end;
+  padding-right: 15px;
+  bottom: 20px;
+}
+
+.client_section .carousel-indicators li {
+  width: 20px;
+  height: 20px;
+  background-color: #d400ff;
+  border-radius: 100%;
+  opacity: 1;
+}
+
+.client_section .carousel-indicators li.active {
+  background-color: #d400ff;
+}
+
+/* end client section */
+
+/* contact section */
+
+.contact_section {
+  padding: 75px 45px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact_section .row {
+  align-items: center;
+}
+
+.contact_section input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #000;
+  width: 90%;
+  margin: 15px 0;
+}
+
+
+
+.contact_form-container button {
+  border: none;
+  background-color: #d400ff;
+  color: #fff;
+  font-size: 15px;
+  padding: 15px 45px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.contact_img-box {
+
+  display: flex;
+  align-items: center;
+
+}
+
+.contact_img-box img {
+  width: 100%;
+}
+
+.contact_section h2 {
+  font-size: 26px;
+  color: #010103;
+  font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 35px;
+}
+
+
+/* end contact section */
+
+
+/* info section */
+.info_section {
+  background-color: #050505;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+
+
+
+  
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.1) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.1) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 100px 100px;
+  display: grid;
+  gap: 10px;
+  /* Defina a altura que desejar, conforme a disposição dos avatares */
+  height: 500px;
+}
+
+.info_logo-box {
+  display: flex;
+  justify-content: center;
+}
+
+.info_logo-box h2 {
+  font-weight: bold;
+  padding: 5px 7px;
+  border-bottom: 1.5px solid #d400ff;
+}
+
+.info_section ul {
+  padding: 0;
+}
+
+.info_section ul li {
+  list-style-type: none;
+  margin: 3px 0;
+}
+
+.info_section ul li a {
+  color: #ffffff;
+}
+
+.info_section ul li a:hover {
+  color: #d400ff;
+}
+
+.info_section h5 {
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+
+
+
+.info_section .form_container input {
+  width: 225px;
+  height: 40px;
+  padding: 10px;
+}
+
+.info_section .form_container input::placeholder {
+  color: #d400ff;
+}
+
+.info_section .form_container button {
+  background-color: #d400ff;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 8px 30px;
+  margin-top: 15px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.social_container {
+  width: 90%;
+  margin: 0 auto;
+  border-top: 1px solid #d400ff;
+  padding: 25px 0;
+}
+
+.info_section .social-box {
+  margin: 0 auto;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.info_section .social-box img {
+  width: 35px;
+  margin-right: 5px;
+}
+
+/* end info section */
+
+/* footer section*/
+
+
+.footer_section {
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  
+  padding: 1%;
+  max-width: 95%;
+  margin: 1%;
+  border-radius: 30px;
+  justify-content: center;
+  display: flex;
+  margin-left: 2%;
+  align-items: center;
+  z-index: 9997;
+  text-align: center;
+  align-content: center;
+  position: relative;
+  
+
+}
+
+.footer_section p {
+  color: #000000;
+  margin: 0;
+  text-align: center;
+  font-size: 17px;
+}
+
+.footer_section a {
+  color: #d400ff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+}
+
+
+
+.carousel-inner {
+  color: #ffffff;
+}
+
+
+.motd:hover {
+  max-width: 20%;
+  transition: all 0.3s ease 0s;
+}
+
+/* Estilos padrão para telas maiores */
+.motd {
+  position: fixed;
+  z-index: 9999;
+  text-align: right;
+  align-items: right;
+  align-content: right;
+  bottom: 2%;
+  left: 1%;
+  padding: 0.6%;
+  max-width: 15%;
+
+}
+
+/* Estilos para telas menores */
+@media screen and (max-width: 768px) {
+  .motd {
+    max-width: 20%;
+  }
+}
+
+/* Estilos para telas ainda menores */
+@media screen and (max-width: 480px) {
+  .motd {
+    max-width: 45%;
+  }
+}
+
+
+
+
+
+
+
+
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 10); /* Ajuste a opacidade se necessário */
+  z-index: 9999;
+  display: block;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 10);
+  display: flex;
+  flex-direction: column; /* Mudança para organização em coluna */
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.loading-spinner {
+  border: 4px solid #2d2424;
+  border-top: 4px solid #d400ff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  display: none;
+}
+
+.loading-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 15px; /* Adicione espaço acima do texto */
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+}
+
+.loading-screen.active .call_to-btn,
+.loading-screen.active .main-heading {
+  display: none; /* Oculte os elementos de texto quando a tela de carregamento estiver ativa */
+}
+
+.loading-screen.active .loading-spinner {
+  display: block; /* Mantenha o spinner visível quando a tela de carregamento estiver ativa */
+}
+
+.loading-screen.active .loading-text {
+  display: block; /* Mantenha o texto de carregamento visível quando a tela de carregamento estiver ativa */
+}
+
+
+.zoom-effect {
+  transition: transform 0.3s; /* Adiciona uma transição suave para o efeito de zoom */
+  width: 150%; /* Adiciona uma largura de 100% */
+  height: 150%; /* Adiciona uma altura de 100% */
+  object-fit: cover; /* Mantém a proporção e preenche o elemento */
+}
+
+.zoom-effect:hover {
+  transform: scale(1.1); /* Aplica o efeito de zoom ao passar o mouse */
+}
+
+
+
+
+.call_to-btn {
+  display: inline-block;
+  padding: 15px 45px;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  transition: all 0.3s ease 0s;
+}
+
+
+
+.call_to-btn img {
+  width: 18px;
+  margin-left: 10px;
+}
+
+.btn_on-hover {
+  transition: all 0.3s ease 0s;
+}
+
+
+
+.call_to-btn {
+  color: black; 
+  background-color: #d400ff;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s; 
+}
+
+.call_to-btn:hover {
+  background-color: #d400ff; 
+  transform: translateY(-7px); /* Adicione a flutuação apenas no estado hover */
+}
+
+.call_to-btn:hover,
+.btn_on-hover:hover {
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+  transform: translateY(-7px);
+}
+
+
+
+.vip_img-container img {
+  width: 400px;
+  height: auto; 
+  position: relative;
+  left: 12%;
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+
+.vip_section {
+  padding: 100px;
+  color: #fff; /* Cor do texto */
+  margin-left: 130px;
+}
+
+.vip_section h3 {
+  font-size: 50px;
+  max-width: 450px;
+}
+.vip_section p {
+  font-size: 20px;
+
+}
+
+.vip_detail-box h3{
+  padding-top: 100px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vip_img-container {
+  width: 400%;
+}
+
+
+/* Efeito de aumento suave quando o mouse passar por cima das imagens */
+.minigame-image img:hover {
+  transform: scale(1.1); /* Aumenta a escala para 110% do tamanho original */
+  transition: transform 0.3s ease; /* Adiciona uma transição suave de 0.3 segundos */
+}
+
+/* Estilos para a seção dos Minigames */
+.minigames_section {
+  padding: 40px; /* Espaçamento interno */
+}
+
+/* Estilos para o título e texto dos Minigames */
+.minigame-detail-box h3 {
+  color: #fff; /* Cor do texto */
+}
+.minigame-detail-box p {
+  color: #f4befe; /* Cor do texto */
+}
+
+.minigame-2,
+.minigame-4,
+.minigame-6 {
+  text-align: right;
+}
+
+.minigames_section {
+  margin-top: 50px;
+}
+
+.minigame-detail-box h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 50px; /* Espaçamento superior do texto */
+}
+.minigame-detail-box p {
+  font-family: 'Raleway', sans-serif;
+  margin-top: 30px; /* Espaçamento superior do texto */
+}
+
+/* Estilos para as imagens dos Minigames */
+.minigame-image {
+  position: relative;
+}
+
+.minigame-image img {
+  border-radius: 15px; /* Bordas arredondadas */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height:100%;
+}
+
+.minigames_section {
+  margin-top: 20px;
+  background-color: #0a000a; /* Cor de fundo meio opaca (#0f0f0f com 50% de transparência) */
+  padding: 40px; /* Espaçamento interno */
+  box-shadow: 0px 0px 60px #000000; /* Sombra */
+}
+.minigames_section h3 {
+  font-size: 50px;
+}
+.minigames_section p {
+  font-size: 20px;
+}
+/* Estilos para o background transparente */
+.minigame-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo meio opaca */
+  border-radius: 15px; /* Bordas arredondadas */
+  z-index: -1; /* Coloca o background atrás da imagem */
+}
+.avatars-container {
+  margin-left: 100px;
+  margin-top: 100px;
+}
+/* Estilos para as imagens de avatares */
+.avatar {
+  width: 300px;
+  height: auto;
+  transition: transform 0.3s ease; /* Transição suave de 0.3 segundos */
+}
+
+/* Adicione a transformação ao passar o mouse */
+.avatar:hover {
+  transform: translateY(-10px) translatex(-1px); /* Move a imagem 10 pixels para cima ao passar o mouse */
+}
+
+/* Estilos para o botão de rolagem para o topo */
+.scroll-to-top {
+  display: none;
+  position: fixed;
+  bottom: 22px;
+  right: 20px;
+  background-color: #000; /* Cor de fundo branca */
+  border: 1px solid #000; /* Borda preta */
+  border-radius: 50%; /* Bordas arredondadas para criar um círculo */
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 18px;
+  color: #fff; /* Cor do ícone (preto) */
+  cursor: pointer;
+  z-index: 9999; /* Coloca o botão sobre tudo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
+  transition: background-color 0.4s, transform 0.3s;
+}
+
+/* Estilize o botão quando passar o mouse sobre ele */
+.scroll-to-top:hover {
+  background-color: #d400ff; /* Altera a cor de fundo para preto */
+  color: #fff; /* Altera a cor do ícone para branco */
+  transform: translateY(-5px) translatex(-1px);
+}
+
+/* Estilos para esconder o botão no início da página */
+#scroll-to-top.hidden {
+  display: none;
+}
+
+
+
+
+/* Estilos para a seção de redes sociais */
+.social-section {
+    background-color: #080308; /* Cor de fundo escura */
     padding: 20px;
-    background-color: #34495e;
-}
-
-h1 {
-    margin: 0;
-}
-
-.carousel {
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-.carousel img {
-    width: 100%;
-    max-width: 800px;
+    box-shadow: 0 0 15px #000000; /* Sombra */
+    border-radius: 15px;
+    max-width: 60%;
     height: auto;
-    margin: 0 auto;
-}
-
-.buttons {
+    font-family: Arial, sans-serif;
+    text-align: center; /* Centraliza o texto horizontalmente */
+    margin: 0 auto; /* Centraliza horizontalmente a seção */
     display: flex;
-    justify-content: center;
-    margin: 20px 0;
+    justify-content: space-between;
+    align-items: center; /* Centraliza verticalmente a seção */
 }
 
-.button-container {
-    flex: 1;
-    max-width: 200px;
-    margin: 0 10px;
+
+.social-column:hover {
+    border: 1.5px solid #d400ff; /* Borda com tom mais escuro */
+    transition: border 1s; 
 }
 
-.button-container a {
-    text-decoration: none;
-    color: #ecf0f1;
-    background-color: #34495e;
+.social-column {
+    background-color: #110811; /* Cor de fundo mais escura */
+    border-radius: 8px; /* Cantos semi-arredondados */
     padding: 10px;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    display: block;
+    width: 255px; /* Largura da coluna */
+    min-width: 255px;
+    max-width: 255px;
+    height: 330px;
     text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra */
+    border: 1.2px solid #1c1c1c; /* Borda com tom mais escuro */
+    font-family: 'Nunito', sans-serif;
 }
 
-.button-container img {
-    width: 100%;
-    height: auto;
-    border-bottom: 2px solid #ecf0f1;
+.social-icon {
+    color: #fff; /* Cor dos ícones em branco */
+    font-size: 35px;
+    margin-top: 10px;
 }
 
-.button-container p {
-    margin: 10px 0 0;
+.social-section h3 {
+    color: #fff; /* Cor dos ícones em branco */
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: -4%;
+    font-family: 'Nunito', sans-serif;
 }
 
-.button-container a:hover {
-    background-color: #1abc9c;
+.social-section p {
+    font-size: 16px;
+    font-weight: normal; /* Removendo o negrito */
+    margin-top: 5%;
+    font-family: 'Nunito', sans-serif;
+    color: #ededed; /* Cor dos ícones em branco */
+}
+
+
+.social-text h4{
+  padding-top: 100px;
+  font-weight: bold;
+  font-size: 50px;
+  margin: 24px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff; /* Cor dos ícones em branco */
+}
+.minigames-text h4{
+  padding-top: 50px;
+  font-size: 35px;
+  margin: 15px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #f4befe; /* Cor dos ícones em branco */
+}
+
+@media (max-width: 768px) {
+    .social-section {
+        flex-direction: column;
+        border-radius: 15px;
+    }
+    
+    .social-column {
+        margin: 10px 0;
+        width: auto;
+    }
 }

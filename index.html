@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site de Minecraft</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecionamento</title>
 </head>
+
 <body>
-    <header>
-        <h1>Bem-vindo ao Mundo de Minecraft</h1>
-    </header>
-    <main>
-        <div class="carousel">
-            <img src="images/exemplo1.jpg" alt="Imagem 1">
-            <img src="images/exemplo2.jpg" alt="Imagem 2">
-            <img src="images/exemplo3.jpg" alt="Imagem 3">
-        </div>
-        <div class="buttons">
-            <div class="button-container">
-                <a href="pages/server.html">
-                    <img src="images/exemplo1.jpg" alt="Servidor de Minecraft">
-                    <p>Servidor de Minecraft</p>
-                </a>
-            </div>
-            <div class="button-container">
-                <a href="pages/store.html">
-                    <img src="images/exemplo2.jpg" alt="Loja de Plugins">
-                    <p>Loja de Plugins</p>
-                </a>
-            </div>
-        </div>
-    </main>
+
+  <script>
+    // Redirecionamento para /home/ após o carregamento da página
+    window.location.href = '/home/';
+  </script>
+
+  <script>
+    window.onload = function () {
+      console.log("Página carregada. Iniciando rolagem automática...");
+      setTimeout(function () {
+        window.scrollTo(0, 0);
+      }, 600); // Ajuste o valor do delay conforme necessário (em milissegundos)
+    };
+  </script>
+
 </body>
+
 </html>
