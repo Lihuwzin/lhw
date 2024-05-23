@@ -2,12 +2,18 @@
 <html lang="en">
 
 <head>
+  <!-- Basic -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
 
-
-  <title>Timelly.net</title>
+  <title>Timelly.net - [ Hub ] </title>
   <!-- Favicon para navegadores da web (32x32 pixels) -->
   <link rel="ico" type="image/png" sizes="48x48" href="../images/favicon.ico">
   <!-- Favicon para navegadores da web (32x32 pixels) -->
@@ -26,25 +32,29 @@
   <!-- Favicon para Safari (16x16 pixels) -->
   <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
 
-
   <link rel="stylesheet" type="text/css" href="../css/custom-style.css" />
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
   <link rel="stylesheet" href="../css/css-circular-prog-bar.css">
-
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,600&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Prompt&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href="../css/style.css" rel="stylesheet" />
   <link href="../css/responsive.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="../css/styles.css" /> <!-- Referência ao styles.css -->
-
-
+  <link rel="stylesheet" type="text/css" href="../css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+
+  <!-- CSS para o background -->
+  <style>
+    body {
+      background-image: url('../images/hero-bg.png');
+      background-size: cover; /* Para cobrir todo o tamanho do elemento pai */
+      background-position: center; /* Centralizar a imagem */
+      background-attachment: fixed; /* Fixar a imagem no viewport, para que não role com a página */
+    }
+  </style>
 </head>
 
 <body>
@@ -89,8 +99,14 @@
   <!-- main content starts -->
   <main class="hub-container">
     <div class="hub-buttons">
-      <a href="../home/" class="hub-button">Timelly - Home</a>
-      <a href="https://www.timelly.store/home/" class="hub-button" target="_blank">LHW - Plugins</a>
+      <div class="hub-button-container">
+        <img src="../images/hero.png" alt="Image 1" class="hub-image">
+        <a href="../home/" class="hub-button">Timelly - Home</a>
+      </div>
+      <div class="hub-button-container">
+        <img src="../images/LHW.png" alt="Image 2" class="hub-image">
+        <a href="https://www.timelly.store/home/" class="hub-button" target="_blank">LHW - Plugins</a>
+      </div>
     </div>
   </main>
   <!-- main content ends -->
