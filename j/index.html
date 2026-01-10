@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+  <title>MC Aim Trainer (OSU + FPS) — Offline</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Canvas principal (mira se move; fundo é "mundo" estático com ciclo dia/noite) -->
+  <canvas id="gameCanvas" aria-label="Game canvas"></canvas>
+
+  <!-- UI overlay -->
+  <div id="uiLayer">
+    <!-- HUD in-game -->
+    <div id="hud" class="hud hidden" aria-label="HUD">
+      <div class="hud-left">
+        <div class="hud-box"><span>FPS</span><b id="hud-fps">—</b></div>
+        <div class="hud-box"><span>Tempo</span><b id="hud-time">00:00</b></div>
+        <div class="hud-box"><span>Modo</span><b id="hud-mode">OSU</b></div>
+      </div>
+      <div class="hud-right">
+        <div class="hud-box"><span>Score</span><b id="hud-score">0</b></div>
+        <div class="hud-box"><span>Combo</span><b id="hud-combo">0</b></div>
+        <div class="hud-box"><span>Acc</span><b id="hud-acc">100%</b></div>
+        <div class="hud-box"><span>H/M</span><b id="hud-hm">0/0</b></div>
+        <div class="hud-box"><span>RT</span><b id="hud-rt">—</b></div>
+      </div>
+    </div>
+
+    <!-- Hint para capturar pointer lock -->
+    <div id="hintCapture" class="hint hidden">
+      Clique no canvas para capturar o mouse (Pointer Lock).<br/>
+      <span class="mc-dim">ESC pausa/libera. F fullscreen. TAB métricas. R reinicia.</span>
+    </div>
+
+    <!-- =========================
+         MENU
+         ========================= -->
+    <section id="screen-menu" class="screen interactive">
+      <div class="mc-panel">
+        <header class="mc-header">
+          <h1>MC AIM TRAINER</h1>
+          <p class="mc-sub">Treino de mira estilo OSU + FPS, com vibe Minecraft (offline).</p>
+          <p class="mc-dim">Pointer Lock recomendado. Sem libs, sem assets externos. 100% local.</p>
+        </header>
+
+        <div class="mc-grid">
+          <button id="btn-play" class="mc-btn mc-btn--green">Jogar</button>
+          <button id="btn-settings" class="mc-btn">Configurações</button>
+          <button id="btn-trainings" class="mc-btn">Treinos</button>
+          <button id="btn-stats" class="mc-btn">Estatísticas</button>
+        </div>
+
+        <div class="mc-tip">
+          <b>Rotina sugerida (25 min):</b><br/>
+          10 min Tracking • 10 min Flick • 5 min Micro. Depois repita com dificuldade maior.
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         LOBBY / TREINOS
+         ========================= -->
+    <section id="screen-lobby" class="screen interactive hidden">
+      <div class="mc-panel mc-panel--wide">
+        <div class="mc-row mc-row--between">
+          <div>
+            <h2 class="mc-h3">LOBBY — Escolha um treino</h2>
+            <div class="mc-inline">
+              <span>Seed:</span><b id="seed-preview" class="mc-badge">auto</b>
+              <span>Dificuldade:</span><b id="difficulty-preview" class="mc-badge">normal</b>
+            </div>
+          </div>
+          <button id="btn-lobby-back" class="mc-btn mc-btn--small mc-btn--red">Voltar</button>
+        </div>
+
+        <div class="mc-split">
+          <div class="mc-panel-inset">
+            <div class="mc-grid mc-grid--modes">
+              <button class="mc-btn mc-btn--green" data-mode="osu">1 — OSU Timing</button>
+              <button class="mc-btn mc-btn--green" data-mode="flick">2 — Flick Shot</button>
+              <button class="mc-btn mc-btn--green" data-mode="tracking">3 — Tracking</button>
+              <button class="mc-btn mc-btn--green" data-mode="switch">4 — Target Switch</button>
+              <button class="mc-btn mc-btn--green" data-mode="micro">5 — Micro Ajuste</button>
+            </div>
+
+            <div class="mc-tip">
+              <b>Hotkeys:</b>
+              <span class="mc-mono">ESC</span> pausa / libera mouse •
+              <span class="mc-mono">F</span> fullscreen •
+              <span class="mc-mono">R</span> reinicia •
+              <span class="mc-mono">TAB</span> métricas •
+              <span class="mc-mono">1..5</span> troca modo
+            </div>
+          </div>
+
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Seed e Consistência</h3>
+            <div class="mc-row mc-row--wrap">
+              <input id="seed-input" class="mc-input" placeholder="seed (opcional) — ex: treino123" style="min-width:280px"/>
+              <button id="btn-seed-random" class="mc-btn mc-btn--small">Seed aleatória</button>
+            </div>
+            <p class="mc-dim">Use seed para repetir a mesma sequência e comparar evolução.</p>
+
+            <h3 class="mc-h3" style="margin-top:14px;">Explicação do modo</h3>
+            <div class="mc-help">
+              <div id="mode-help">—</div>
+              <div class="mc-help-sub" id="mode-common">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         SETTINGS
+         ========================= -->
+    <section id="screen-settings" class="screen interactive hidden">
+      <div class="mc-panel mc-panel--wide">
+        <div class="mc-row mc-row--between">
+          <div>
+            <h2 class="mc-h3">Configurações</h2>
+            <p class="mc-dim">Salvar aplica. Cancelar desfaz. (Corrige bug de "voltar/config")</p>
+          </div>
+          <div class="mc-row">
+            <button id="btn-settings-reset" class="mc-btn mc-btn--small">Reset</button>
+            <button id="btn-settings-cancel" class="mc-btn mc-btn--small mc-btn--red">Cancelar</button>
+            <button id="btn-settings-save" class="mc-btn mc-btn--small mc-btn--green">Salvar</button>
+          </div>
+        </div>
+
+        <div class="mc-settings">
+          <div class="mc-col">
+            <h3 class="mc-h3">Mira / Sens</h3>
+
+            <div class="mc-setting">
+              <label>Sensibilidade (modo livre)</label>
+              <div class="mc-row">
+                <input id="sens-slider" type="range" min="0.2" max="8" step="0.1"/>
+                <b class="mc-badge" id="sens-value">—</b>
+              </div>
+              <div class="mc-dim">Usado apenas quando "Modo Minecraft" está desligado.</div>
+            </div>
+
+            <div class="mc-setting">
+              <label class="mc-row"><input id="mc-mode" type="checkbox"/> <span>Modo Minecraft (feel aproximado)</span></label>
+              <div id="mc-mode-box" class="mc-panel-inset">
+                <div class="mc-setting">
+                  <label>Sens Minecraft (%)</label>
+                  <div class="mc-row">
+                    <input id="mc-sens-slider" type="range" min="0" max="200" step="1"/>
+                    <b class="mc-badge" id="mc-sens-value">—</b>
+                  </div>
+                  <div class="mc-dim">0–200%. (Internamente convertido para 0–1)</div>
+                </div>
+
+                <div class="mc-setting">
+                  <label>FOV</label>
+                  <div class="mc-row">
+                    <input id="fov-slider" type="range" min="60" max="120" step="1"/>
+                    <b class="mc-badge" id="fov-value">—</b>
+                  </div>
+                </div>
+
+                <div class="mc-setting">
+                  <label>DPI (opcional, p/ cm/360)</label>
+                  <input id="dpi-input" class="mc-input" type="number" min="0" max="50000" placeholder="ex: 800"/>
+                </div>
+
+                <div class="mc-metrics-inline">
+                  <div class="mc-badge">graus/pixel: <b class="mc-mono" id="deg-per-px">—</b></div>
+                  <div class="mc-badge">graus/count: <b class="mc-mono" id="deg-per-count">—</b></div>
+                  <div class="mc-badge">cm/360: <b class="mc-mono" id="cm-per-360">—</b></div>
+                  <div class="mc-badge">eDPI: <b class="mc-mono" id="edpi">—</b></div>
+                </div>
+
+                <div class="mc-dim">Fórmula usada: <span class="mc-mono">(sens*0.6+0.2)^3 * 8 * 0.15</span> (graus por count). A escala por pixel usa o FOV.</div>
+              </div>
+            </div>
+
+            <div class="mc-setting">
+              <label>Smoothing (filtro exponencial)</label>
+              <div class="mc-row">
+                <input id="smooth-slider" type="range" min="0" max="0.95" step="0.01"/>
+                <b class="mc-badge" id="smooth-value">—</b>
+              </div>
+              <div class="mc-dim">Desligado por padrão (0). Útil para reduzir micro tremor.</div>
+            </div>
+
+            <div class="mc-setting">
+              <label class="mc-row"><input id="snap-toggle" type="checkbox"/> <span>Snap pixels (crosshair "pixel perfect")</span></label>
+            </div>
+          </div>
+
+          <div class="mc-col">
+            <h3 class="mc-h3">Visual / UX</h3>
+
+            <div class="mc-setting">
+              <label>Crosshair</label>
+              <div class="mc-row mc-row--wrap">
+                <select id="crosshair-type" class="mc-select">
+                  <option value="plus">Plus</option>
+                  <option value="cross">Cross</option>
+                  <option value="dot">Dot</option>
+                  <option value="circle">Circle</option>
+                </select>
+                <span>Tamanho</span>
+                <input id="crosshair-size" type="range" min="6" max="26" step="1"/>
+                <b class="mc-badge" id="crosshair-size-value">—</b>
+                <input id="crosshair-color" type="color" value="#4CAF50"/>
+              </div>
+            </div>
+
+            <div class="mc-setting">
+              <label class="mc-row"><input id="daynight-toggle" type="checkbox"/> <span>Ciclo dia/noite</span></label>
+              <div class="mc-row">
+                <input id="daynight-speed" type="range" min="0.2" max="4" step="0.1"/>
+                <b class="mc-badge" id="daynight-speed-value">—</b>
+              </div>
+              <div class="mc-dim">Velocidade mais alta = troca mais rápida (estrelas aparecem à noite).</div>
+            </div>
+
+            <div class="mc-setting">
+              <label>Partículas</label>
+              <div class="mc-row">
+                <input id="particles-slider" type="range" min="0" max="240" step="10"/>
+                <b class="mc-badge" id="particles-value">—</b>
+              </div>
+              <div class="mc-dim">Reduzir partículas melhora FPS em PCs fracos.</div>
+            </div>
+
+            <div class="mc-setting">
+              <label>Volume</label>
+              <div class="mc-row">
+                <input id="volume-slider" type="range" min="0" max="100" step="1"/>
+                <b class="mc-badge" id="volume-value">—</b>
+              </div>
+              <div class="mc-dim">Som gerado via WebAudio (sem arquivos).</div>
+            </div>
+
+            <div class="mc-setting">
+              <label>Dificuldade (preset)</label>
+              <select id="difficulty-select" class="mc-select">
+                <option value="easy">Easy</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+                <option value="insane">Insane</option>
+              </select>
+              <div class="mc-dim">Ajusta tamanho, velocidade e janelas de timing de forma global.</div>
+            </div>
+
+            <h3 class="mc-h3" style="margin-top:12px;">Acessibilidade</h3>
+            <div class="mc-setting"><label class="mc-row"><input id="contrast-toggle" type="checkbox"/> <span>Alto contraste</span></label></div>
+            <div class="mc-setting"><label class="mc-row"><input id="reduce-particles-toggle" type="checkbox"/> <span>Reduzir partículas</span></label></div>
+            <div class="mc-setting"><label class="mc-row"><input id="colorblind-toggle" type="checkbox"/> <span>Paleta daltônica</span></label></div>
+            <div class="mc-setting"><label class="mc-row"><input id="tips-toggle" type="checkbox"/> <span>Dicas e heurísticas</span></label></div>
+          </div>
+        </div>
+
+        <div class="mc-tip">
+          <b>Nota sobre "aceleração do mouse":</b> No browser, usando Pointer Lock, o movimento é relativo (movementX/Y)
+          e não depende diretamente do cursor. Ainda assim, o sistema operacional pode interferir indiretamente — o jogo evita
+          aceleração própria e usa apenas deltas crus + smoothing opcional.
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         STATS
+         ========================= -->
+    <section id="screen-stats" class="screen interactive hidden">
+      <div class="mc-panel mc-panel--wide">
+        <div class="mc-row mc-row--between">
+          <div>
+            <h2 class="mc-h3">Estatísticas</h2>
+            <p class="mc-dim">Top 10 por modo + últimas 20 sessões (localStorage).</p>
+          </div>
+          <div class="mc-row">
+            <button id="btn-stats-clear" class="mc-btn mc-btn--small">Limpar Top 10 do modo</button>
+            <button id="btn-stats-back" class="mc-btn mc-btn--small mc-btn--red">Voltar</button>
+          </div>
+        </div>
+
+        <div class="mc-row mc-row--wrap" style="margin:10px 0;">
+          <span>Modo:</span>
+          <select id="stats-mode-select" class="mc-select">
+            <option value="osu">OSU Timing</option>
+            <option value="flick">Flick Shot</option>
+            <option value="tracking">Tracking</option>
+            <option value="switch">Target Switch</option>
+            <option value="micro">Micro Ajuste</option>
+          </select>
+        </div>
+
+        <div class="mc-split">
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Top 10</h3>
+            <ol id="stats-top10" class="mc-list mc-list--ordered"></ol>
+          </div>
+
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Últimas sessões</h3>
+            <div id="stats-sessions" class="mc-sessions"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         LIVE OVERLAY (TAB)
+         ========================= -->
+    <section id="liveOverlay" class="overlay interactive hidden">
+      <div class="mc-panel">
+        <div class="mc-row mc-row--between">
+          <h2 class="mc-h3">Métricas ao vivo</h2>
+          <button id="btn-live-close" class="mc-btn mc-btn--small mc-btn--red">Fechar</button>
+        </div>
+        <div class="mc-split">
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Métricas</h3>
+            <div id="live-metrics" class="mc-help"></div>
+          </div>
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Heurísticas / Dicas</h3>
+            <div id="live-tips" class="mc-help"></div>
+          </div>
+        </div>
+        <p class="mc-dim">Dica: se o mouse "escapa" do jogo, clique no canvas para recapturar (Pointer Lock).</p>
+      </div>
+    </section>
+
+    <!-- =========================
+         PAUSE
+         ========================= -->
+    <section id="screen-pause" class="overlay interactive hidden">
+      <div class="mc-panel">
+        <div class="mc-row mc-row--between">
+          <h2 class="mc-h3">Pausado</h2>
+          <div class="mc-badge">ESC alterna pausar/voltar</div>
+        </div>
+
+        <div class="mc-grid">
+          <button id="btn-resume" class="mc-btn mc-btn--green">Continuar</button>
+          <button id="btn-capture" class="mc-btn">Capturar mouse</button>
+          <button id="btn-restart" class="mc-btn">Reiniciar</button>
+          <button id="btn-quit" class="mc-btn mc-btn--red">Sair</button>
+        </div>
+
+        <div class="mc-tip">
+          Se o ESC não acionar (alguns browsers liberam Pointer Lock sem emitir keydown),
+          o jogo pausa automaticamente ao perder o Pointer Lock.
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         RESULTS
+         ========================= -->
+    <section id="screen-results" class="screen interactive hidden">
+      <div class="mc-panel mc-panel--wide">
+        <div class="mc-row mc-row--between">
+          <div>
+            <h2 class="mc-h3">Resultados</h2>
+            <div class="mc-inline">
+              <span>Score</span><b class="mc-badge" id="res-score">0</b>
+              <span>Acc</span><b class="mc-badge" id="res-acc">—</b>
+              <span>Combo</span><b class="mc-badge" id="res-combo">0</b>
+              <span>RT</span><b class="mc-badge" id="res-rt">—</b>
+            </div>
+          </div>
+          <div class="mc-row">
+            <button id="btn-results-retry" class="mc-btn mc-btn--small mc-btn--green">Repetir</button>
+            <button id="btn-results-lobby" class="mc-btn mc-btn--small">Lobby</button>
+            <button id="btn-results-back" class="mc-btn mc-btn--small mc-btn--red">Menu</button>
+          </div>
+        </div>
+
+        <div class="mc-split">
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Diagnóstico</h3>
+            <div id="res-diagnosis" class="mc-help">—</div>
+            <h3 class="mc-h3" style="margin-top:12px;">Sugestões</h3>
+            <ul id="res-suggestions" class="mc-list"></ul>
+          </div>
+
+          <div class="mc-panel-inset">
+            <h3 class="mc-h3">Gráficos</h3>
+            <div class="charts">
+              <div class="chart">
+                <div class="chart-title">Acurácia ao longo do tempo</div>
+                <canvas id="chart-acc" class="chart-canvas"></canvas>
+              </div>
+              <div class="chart">
+                <div class="chart-title">Reação ao longo do tempo</div>
+                <canvas id="chart-rt" class="chart-canvas"></canvas>
+              </div>
+              <div class="chart">
+                <div class="chart-title">Distribuição do erro radial</div>
+                <canvas id="chart-hist" class="chart-canvas"></canvas>
+              </div>
+              <div class="chart">
+                <div class="chart-title">Heatmap (onde erra)</div>
+                <canvas id="chart-heat" class="chart-canvas"></canvas>
+              </div>
+            </div>
+            <p class="mc-dim">Obs: Tracking usa "on-target" como acurácia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
