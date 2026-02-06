@@ -1,0 +1,529 @@
+/* css/components.css */
+/* Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    color: var(--accent-primary);
+    margin-top: 0;
+}
+
+/* Cards de destaque */
+.highlight-card {
+    border-left: 4px solid;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: var(--radius);
+    background-color: var(--bg-card);
+}
+
+.highlight-card.warning {
+    border-left-color: var(--accent-warning);
+    background-color: rgba(245, 158, 11, 0.05);
+}
+
+.highlight-card.tip {
+    border-left-color: var(--accent-primary);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.highlight-card.concept {
+    border-left-color: var(--accent-info);
+    background-color: rgba(14, 165, 233, 0.05);
+}
+
+.highlight-card.danger {
+    border-left-color: var(--accent-danger);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.highlight-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0;
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0da271;
+    transform: translateY(-1px);
+    text-decoration: none;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-card);
+    transform: translateY(-1px);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.download-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.download-card h3 {
+    margin-top: 0;
+    color: var(--accent-primary);
+}
+
+.download-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Blocos de código */
+.code-block {
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
+    overflow: hidden;
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.copy-btn:hover {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.code-block.small pre {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+}
+
+/* Checklist */
+.checklist {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.checklist-item:last-child {
+    margin-bottom: 0;
+}
+
+.checklist-item input[type="checkbox"] {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+}
+
+.checklist-item label {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Tabelas */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background-color: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.data-table th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+}
+
+.data-table td {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.data-table tr:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* Arquitetura */
+.architecture-diagram {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.arch-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.arch-item {
+    flex: 1;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.arch-title {
+    font-weight: 600;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.arch-content ul {
+    margin: 0;
+    list-style: none;
+}
+
+.arch-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.arch-content li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-secondary);
+}
+
+.arch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    position: relative;
+    min-width: 140px;
+}
+
+.connector-line {
+    width: 2px;
+    height: 60px;
+    background-color: var(--border-color);
+}
+
+.connector-text {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 160px;
+}
+
+/* Navegação de passos */
+.step-navigation {
+    display: flex;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.step {
+    flex-shrink: 0;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.step:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.step.active {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.step-content {
+    display: none;
+}
+
+.step-content.active {
+    display: block;
+}
+
+/* Comparação de custos */
+.cost-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.cost-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.cost-card h3 {
+    color: var(--accent-primary);
+    margin-top: 0;
+}
+
+.cost-title {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.cost-breakdown {
+    margin-bottom: 1.5rem;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    gap: 1rem;
+}
+
+.cost-item:last-child {
+    border-bottom: none;
+}
+
+.cost-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-top: 2px solid var(--border-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.cost-note {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.cost-note.warning {
+    color: var(--accent-warning);
+}
+
+/* FAQ */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.faq-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.faq-item h3 {
+    color: var(--accent-primary);
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+/* Links */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.link-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.link-card h3 {
+    color: var(--accent-primary);
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.link-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.link-card li {
+    margin-bottom: 0.75rem;
+}
+
+.link-card li:last-child {
+    margin-bottom: 0;
+}
+
+.link-card a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.link-card a:hover {
+    background-color: var(--bg-tertiary);
+    text-decoration: none;
+}
+
+/* Glossário */
+.glossary {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.glossary-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1rem;
+    font-size: 0.9rem;
+    cursor: help;
+    position: relative;
+}
+
+.glossary-item strong {
+    color: var(--accent-primary);
+}
+
+/* Listas numeradas */
+.numbered-list {
+    list-style: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.numbered-list li {
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+}
+
+/* Tooltip */
+.tooltip {
+    position: fixed;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    max-width: 320px;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip.active {
+    opacity: 1;
+}

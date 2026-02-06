@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guia Completo: Hospedagem Minecraft com Pterodactyl</title>
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="Guia prático e completo para hospedar servidores Minecraft (Velocity + SportPaper) com Pterodactyl, segurança, custos e operação." />
+</head>
+<body>
+
+    <!-- Sidebar Esquerda -->
+    <aside class="sidebar-left">
+        <div class="logo">
+            <h1>Pterodactyl Guide</h1>
+            <p class="logo-subtitle">Hospedagem Minecraft Profissional</p>
+        </div>
+
+        <!-- Busca -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar no guia..." />
+            <button id="search-button" aria-label="Buscar">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="search-results" class="hidden" aria-live="polite"></div>
+
+        <!-- Navegação Principal -->
+        <nav class="main-nav" aria-label="Seções">
+            <ul>
+                <li>
+                    <a href="#home" class="nav-item active" data-section="home">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/home.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/home.svg" alt="" aria-hidden="true">
+                        <span>Início</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#visao-geral" class="nav-item" data-section="visao-geral">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/guide.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/guide.svg" alt="" aria-hidden="true">
+                        <span>Visão Geral</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#instalacao-panel" class="nav-item" data-section="instalacao-panel">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/panel.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/panel.svg" alt="" aria-hidden="true">
+                        <span>Instalação Panel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#instalacao-wings" class="nav-item" data-section="instalacao-wings">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/node.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/node.svg" alt="" aria-hidden="true">
+                        <span>Instalação Wings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#configuracao-proxy" class="nav-item" data-section="configuracao-proxy">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/proxy.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/proxy.svg" alt="" aria-hidden="true">
+                        <span>Config Proxy</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#configuracao-backend" class="nav-item" data-section="configuracao-backend">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/backend.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/backend.svg" alt="" aria-hidden="true">
+                        <span>Config Backend</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#seguranca" class="nav-item" data-section="seguranca">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/security.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/security.svg" alt="" aria-hidden="true">
+                        <span>Segurança</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#custos" class="nav-item" data-section="custos">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/costs.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/costs.svg" alt="" aria-hidden="true">
+                        <span>Custos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#faq" class="nav-item" data-section="faq">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/faq.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/faq.svg" alt="" aria-hidden="true">
+                        <span>FAQ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#monitoramento" class="nav-item" data-section="monitoramento">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/monitor.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/monitor.svg" alt="" aria-hidden="true">
+                        <span>Monitoramento</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#backup" class="nav-item" data-section="backup">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/backup.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/backup.svg" alt="" aria-hidden="true">
+                        <span>Backup</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#links" class="nav-item" data-section="links">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <use href="assets/icons/links.svg#icon"></use>
+                        </svg>
+                        <img class="nav-icon" src="assets/icons/links.svg" alt="" aria-hidden="true">
+                        <span>Links Úteis</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Toggle Tema -->
+        <div class="theme-toggle">
+            <button id="theme-toggle-btn" aria-label="Alternar tema">
+                <span class="theme-icon">🌙</span>
+                <span class="theme-text">Modo Claro</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="content" role="main">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb" aria-label="Breadcrumb">
+            <span>Home</span>
+            <span class="separator">›</span>
+            <span id="current-section">Início</span>
+        </div>
+
+        <noscript>
+            <div class="highlight-card warning">
+                <h3>⚠️ JavaScript desativado</h3>
+                <p>Ative JavaScript para navegação, pesquisa, tooltips e botões de copiar funcionarem corretamente.</p>
+            </div>
+        </noscript>
+
+        <!-- SEÇÃO: HOME -->
+        <section id="home" class="content-section active">
+            <h1>Guia Completo: Hospedagem Minecraft</h1>
+            <p class="subtitle">Pterodactyl + 2 VPS + Velocity + SportPaper</p>
+
+            <div class="highlight-card warning">
+                <h3>⚠️ Importante</h3>
+                <p>Este guia é para configuração profissional. Se você está começando, siga cada passo com atenção. Alterações incorretas podem comprometer a segurança do servidor.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎯 Objetivo</h3>
+                    <p>Criar uma infraestrutura robusta e segura para hospedar servidores Minecraft com gerenciamento profissional através do Pterodactyl.</p>
+                </div>
+                <div class="card">
+                    <h3>🏗️ Arquitetura</h3>
+                    <p>Separação entre Panel (gerenciamento) e Wings (execução), com proxy Velocity e backends SportPaper distribuídos.</p>
+                </div>
+                <div class="card">
+                    <h3>🔒 Segurança</h3>
+                    <p>Implementação de firewall, SSH hardening, Fail2ban, SSL e isolamento completo dos containers.</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Custos</h3>
+                    <p>Análise detalhada de custos para diferentes escalas (50-100 players) com otimizações para economizar.</p>
+                </div>
+            </div>
+
+            <h2>📚 O que você vai aprender</h2>
+            <ul class="numbered-list">
+                <li>Como instalar e configurar o Pterodactyl Panel em uma VPS separada</li>
+                <li>Como instalar Wings e configurar Nodes para execução de servidores</li>
+                <li>Configuração completa do Velocity Proxy com segurança</li>
+                <li>Setup otimizado do SportPaper para performance máxima</li>
+                <li>Implementação de medidas de segurança essenciais</li>
+                <li>Estratégias de backup e monitoramento</li>
+            </ul>
+
+            <div class="download-card">
+                <h3>📄 PDFs Completos do Guia</h3>
+                <p>Baixe os guias completos em PDF para consulta offline</p>
+                <div class="download-buttons">
+                    <a href="assets/pdfs/Guia_Pterodactyl_2VPS_Velocity_SportPaper_BR.pdf" class="btn btn-primary" download>
+                        📥 Guia Pterodactyl Completo
+                    </a>
+                    <a href="assets/pdfs/Guia_Custos_Hospedagem_Minecraft_50-100_BR.pdf" class="btn btn-secondary" download>
+                        📥 Guia de Custos
+                    </a>
+                </div>
+            </div>
+
+            <h2>✅ Checklist Inicial</h2>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="home-check-1">
+                    <label for="home-check-1">Tenho 2 VPS com Ubuntu 22.04+ (Panel e Node separados)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="home-check-2">
+                    <label for="home-check-2">Tenho um domínio ou subdomínios configurados (panel.meudominio.com)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="home-check-3">
+                    <label for="home-check-3">Tenho acesso SSH root nas VPS</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="home-check-4">
+                    <label for="home-check-4">Entendo conceitos básicos de Linux e comandos terminal</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: VISÃO GERAL -->
+        <section id="visao-geral" class="content-section">
+            <h1>Visão Geral da Arquitetura</h1>
+            <p class="subtitle">Entenda como tudo se conecta</p>
+
+            <h2>🏛️ Arquitetura Recomendada</h2>
+            <div class="architecture-diagram">
+                <div class="arch-row">
+                    <div class="arch-item">
+                        <div class="arch-title">VPS 1 - Panel</div>
+                        <div class="arch-content">
+                            <ul>
+                                <li>Pterodactyl Panel</li>
+                                <li>Banco de dados MySQL</li>
+                                <li>Redis (cache/sessões)</li>
+                                <li>Nginx (reverse proxy)</li>
+                                <li>SSL/TLS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-text">API Segura<br>(HTTPS)</div>
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="arch-item">
+                        <div class="arch-title">VPS 2 - Node</div>
+                        <div class="arch-content">
+                            <ul>
+                                <li>Pterodactyl Wings</li>
+                                <li>Docker Containers</li>
+                                <li>Velocity Proxy</li>
+                                <li>SportPaper Servers</li>
+                                <li>Backup Storage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-card concept">
+                <h3>💡 Por que separar Panel e Wings?</h3>
+                <p>Separar o Panel (gerenciamento) do Wings (execução) aumenta drasticamente a segurança. Mesmo se um servidor Minecraft for comprometido, o atacante não terá acesso ao painel de controle.</p>
+            </div>
+
+            <h2>🔄 Fluxo de Conexão</h2>
+            <ol class="numbered-list">
+                <li>Jogador conecta no IP/Domínio do <span data-term="Velocity">Velocity Proxy</span></li>
+                <li>Velocity direciona para o backend <span data-term="SportPaper">SportPaper</span> apropriado</li>
+                <li>Panel gerencia todos os servidores via API com Wings</li>
+                <li>Wings executa os containers Docker isoladamente</li>
+            </ol>
+
+            <h2>📊 Componentes Principais</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Função</th>
+                        <th>Onde Rodar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pterodactyl Panel</strong></td>
+                        <td>Interface web de gerenciamento</td>
+                        <td>VPS 1 (Panel)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wings</strong></td>
+                        <td>Daemon que executa containers</td>
+                        <td>VPS 2 (Node)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Velocity</strong></td>
+                        <td>Proxy para múltiplos servidores</td>
+                        <td>VPS 2 (Node)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SportPaper</strong></td>
+                        <td>Servidor Minecraft otimizado</td>
+                        <td>VPS 2 (Node)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SEÇÃO: INSTALAÇÃO PANEL -->
+        <section id="instalacao-panel" class="content-section">
+            <h1>Instalação do Pterodactyl Panel</h1>
+            <p class="subtitle">Configuração completa na VPS 1</p>
+
+            <div class="highlight-card tip">
+                <h3>✅ Pré-requisitos</h3>
+                <p>Ubuntu 22.04 LTS, 2GB+ RAM, 20GB+ SSD, domínio configurado apontando para IP da VPS.</p>
+            </div>
+
+            <h2>1️⃣ Preparação do Sistema</h2>
+            <p>Atualize o sistema e instale dependências básicas:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Terminal - Atualização</span>
+                    <button class="copy-btn">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M10 1.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h1z"/>
+                            <path d="M4.5 3A1.5 1.5 0 0 0 3 4.5v9A1.5 1.5 0 0 0 4.5 15h7A1.5 1.5 0 0 0 13 13.5v-9A1.5 1.5 0 0 0 11.5 3h-7zM4 4.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-9z"/>
+                            <path d="M1.5 5A1.5 1.5 0 0 1 3 3.5v9A2.5 2.5 0 0 0 5.5 15H4A2.5 2.5 0 0 1 1.5 12.5v-7.5z"/>
+                        </svg>
+                        Copiar
+                    </button>
+                </div>
+                <pre><code>apt update &amp;&amp; apt upgrade -y
+apt install -y curl wget sudo gnupg2 ca-certificates lsb-release apt-transport-https software-properties-common</code></pre>
+            </div>
+
+            <h2>2️⃣ Instalar Docker (Opcional)</h2>
+            <p>O Panel não precisa de Docker, mas pode ser útil para ferramentas auxiliares. Se preferir, pule esta etapa.</p>
+
+            <h2>3️⃣ Instalar Dependências do Panel</h2>
+            <p>O Pterodactyl Panel requer PHP, Composer, MariaDB e Nginx:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Instalação PHP + Nginx</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>apt install -y nginx mariadb-server redis-server
+apt install -y php8.1 php8.1-cli php8.1-gd php8.1-mysql php8.1-pdo php8.1-mbstring php8.1-tokenizer php8.1-bcmath php8.1-xml php8.1-fpm php8.1-curl php8.1-zip</code></pre>
+            </div>
+
+            <div class="highlight-card warning">
+                <h3>⚠️ Versão do PHP</h3>
+                <p>Verifique no site oficial do Pterodactyl qual versão do PHP é suportada. Ajuste conforme necessário (8.1, 8.2, etc).</p>
+            </div>
+
+            <h2>4️⃣ Download e Configuração do Panel</h2>
+            <p>Baixe a versão mais recente do Panel:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Download Panel</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>mkdir -p /var/www/pterodactyl
+cd /var/www/pterodactyl
+curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
+tar -xzvf panel.tar.gz
+chmod -R 755 storage/* bootstrap/cache/</code></pre>
+            </div>
+
+            <h2>5️⃣ Instalar Composer e Dependências</h2>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Composer</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+cd /var/www/pterodactyl
+composer install --no-dev --optimize-autoloader</code></pre>
+            </div>
+
+            <h2>6️⃣ Configurar Banco de Dados</h2>
+            <p>Crie banco e usuário:</p>
+
+            <div class="code-block small">
+                <div class="code-header">
+                    <span>MariaDB</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>mysql -u root -p</code></pre>
+            </div>
+
+            <pre><code class="language-sql">CREATE DATABASE panel;
+CREATE USER 'pterodactyl'@'127.0.0.1' IDENTIFIED BY 'SENHA_FORTE_AQUI';
+GRANT ALL PRIVILEGES ON panel.* TO 'pterodactyl'@'127.0.0.1';
+FLUSH PRIVILEGES;
+exit;</code></pre>
+
+            <h2>7️⃣ Configurar Environment</h2>
+            <p>Configure o arquivo <code>.env</code>:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Setup .env</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>cp .env.example .env
+php artisan key:generate --force
+php artisan p:environment:setup
+php artisan p:environment:database
+php artisan p:environment:mail</code></pre>
+            </div>
+
+            <h2>8️⃣ Migrar e Criar Usuário Admin</h2>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Migrations</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>php artisan migrate --seed --force
+php artisan p:user:make</code></pre>
+            </div>
+
+            <h2>9️⃣ Configurar Nginx + SSL</h2>
+            <p>Configure o virtual host do Nginx e obtenha certificado SSL com Certbot.</p>
+
+            <div class="highlight-card tip">
+                <h3>📌 Dica</h3>
+                <p>No final, você terá o Panel acessível em <code>https://panel.seudominio.com</code> com SSL ativo.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: INSTALAÇÃO WINGS -->
+        <section id="instalacao-wings" class="content-section">
+            <h1>Instalação do Wings (Node)</h1>
+            <p class="subtitle">Configuração completa na VPS 2</p>
+
+            <h2>1️⃣ Instalar Docker</h2>
+            <p>O Wings usa Docker para executar os servidores em containers isolados:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Docker Install</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>curl -sSL https://get.docker.com/ | CHANNEL=stable bash
+systemctl enable --now docker</code></pre>
+            </div>
+
+            <h2>2️⃣ Instalar Wings</h2>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Download Wings</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>mkdir -p /etc/pterodactyl
+curl -L -o /usr/local/bin/wings https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_amd64
+chmod u+x /usr/local/bin/wings</code></pre>
+            </div>
+
+            <h2>3️⃣ Configurar Systemd</h2>
+            <p>Crie o serviço do Wings:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Service File</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>cat &gt; /etc/systemd/system/wings.service &lt;&lt; 'EOF'
+[Unit]
+Description=Pterodactyl Wings Daemon
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=root
+WorkingDirectory=/etc/pterodactyl
+LimitNOFILE=4096
+PIDFile=/var/run/wings/daemon.pid
+ExecStart=/usr/local/bin/wings
+Restart=on-failure
+StartLimitInterval=180
+StartLimitBurst=30
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+EOF</code></pre>
+            </div>
+
+            <div class="code-block small">
+                <div class="code-header">
+                    <span>Enable Wings</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>systemctl enable --now wings</code></pre>
+            </div>
+
+            <h2>4️⃣ Configurar Node no Panel</h2>
+            <p>No Panel, vá em <strong>Admin → Nodes → Create New</strong> e configure:</p>
+
+            <ul>
+                <li>FQDN do Node (node1.seudominio.com ou IP)</li>
+                <li>Comunicação SSL habilitada</li>
+                <li>Portas: 8080 (API Wings) e ranges de jogos (ex: 25565-25600)</li>
+            </ul>
+
+            <div class="highlight-card warning">
+                <h3>⚠️ Certificado SSL no Node</h3>
+                <p>Para segurança, configure SSL também no Node (Let's Encrypt) ou use proxy reverso. Nunca exponha Wings sem HTTPS.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CONFIG PROXY -->
+        <section id="configuracao-proxy" class="content-section">
+            <h1>Configuração do Velocity Proxy</h1>
+            <p class="subtitle">Proxy seguro e otimizado</p>
+
+            <h2>🎮 O que é Velocity?</h2>
+            <p><span data-term="Velocity">Velocity</span> é um proxy moderno e performático para Minecraft, substituto do BungeeCord. Ele permite múltiplos servidores backend com uma entrada única.</p>
+
+            <h2>📦 Configuração no Pterodactyl</h2>
+            <p>Crie um servidor no Panel usando um Egg de proxy (Velocity) e configure:</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Memória</h3>
+                    <p>2-4GB para 100 players</p>
+                </div>
+                <div class="card">
+                    <h3>CPU</h3>
+                    <p>2 cores dedicados</p>
+                </div>
+                <div class="card">
+                    <h3>Porta</h3>
+                    <p>25565 (principal)</p>
+                </div>
+            </div>
+
+            <h2>⚙️ velocity.toml</h2>
+            <p>Configuração essencial do arquivo:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>velocity.toml - básico</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>[servers]
+lobby = "127.0.0.1:25566"
+survival = "127.0.0.1:25567"
+
+[forced-hosts]
+"seudominio.com" = ["lobby"]
+
+[advanced]
+compression-threshold = 256
+login-ratelimit = 3000</code></pre>
+            </div>
+
+            <div class="highlight-card tip">
+                <h3>🔒 Segurança do Proxy</h3>
+                <p>Configure firewall para permitir conexões externas apenas na porta do proxy. Backends devem aceitar conexões apenas do proxy (localhost ou rede interna Docker).</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CONFIG BACKEND -->
+        <section id="configuracao-backend" class="content-section">
+            <h1>Configuração do SportPaper Backend</h1>
+            <p class="subtitle">Servidores Minecraft otimizados</p>
+
+            <h2>🏃‍♂️ Por que SportPaper?</h2>
+            <p><span data-term="SportPaper">SportPaper</span> é uma fork otimizada do Paper para Minecraft 1.8.8, focada em performance para servidores PvP e minigames.</p>
+
+            <h2>⚙️ Configuração Recomendada</h2>
+            <div class="step-navigation">
+                <div class="step active" data-step="1">1. JVM Flags</div>
+                <div class="step" data-step="2">2. server.properties</div>
+                <div class="step" data-step="3">3. spigot.yml</div>
+                <div class="step" data-step="4">4. bukkit.yml</div>
+            </div>
+
+            <div class="step-content active" data-step="1">
+                <h3>JVM Flags Otimizadas</h3>
+                <p>Exemplo de flags com <code>G1GC</code> (ajuste <code>-Xms</code>/<code>-Xmx</code> conforme a RAM alocada):</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Startup Command</span>
+                        <button class="copy-btn">Copiar</button>
+                    </div>
+                    <pre><code>java -Xms4G -Xmx4G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui</code></pre>
+                </div>
+            </div>
+
+            <div class="step-content" data-step="2">
+                <h3>server.properties</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Config Base</span>
+                        <button class="copy-btn">Copiar</button>
+                    </div>
+                    <pre><code>view-distance=6
+network-compression-threshold=256
+max-players=100
+use-native-transport=true</code></pre>
+                </div>
+            </div>
+
+            <div class="step-content" data-step="3">
+                <h3>spigot.yml</h3>
+                <p>Ajustes para performance:</p>
+                <ul>
+                    <li>entity-activation-range reduzido</li>
+                    <li>merge-radius otimizado</li>
+                    <li>ticks-per ajustado</li>
+                </ul>
+            </div>
+
+            <div class="step-content" data-step="4">
+                <h3>bukkit.yml</h3>
+                <p>Configure limites de spawn e chunk-gc para reduzir lag.</p>
+            </div>
+
+            <div class="highlight-card concept">
+                <h3>💡 Dica de Performance</h3>
+                <p>Para 100 players, use SSD NVMe e CPU com alto single-thread. Minecraft depende muito de performance por core.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: SEGURANÇA -->
+        <section id="seguranca" class="content-section">
+            <h1>Segurança Completa</h1>
+            <p class="subtitle">Proteja sua infraestrutura</p>
+
+            <h2>🔥 Firewall UFW</h2>
+            <p>Configure firewall permitindo apenas portas necessárias:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>UFW Setup</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>ufw default deny incoming
+ufw default allow outgoing
+ufw allow ssh
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow 25565/tcp  # Proxy
+ufw enable</code></pre>
+            </div>
+
+            <h2>🔑 SSH Hardening</h2>
+            <p>Edite <code>/etc/ssh/sshd_config</code>:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>SSH Config</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>PermitRootLogin no
+PasswordAuthentication no
+Port 2222
+MaxAuthTries 3</code></pre>
+            </div>
+
+            <h2>🛡️ Fail2ban</h2>
+            <p>Proteja contra brute force:</p>
+
+            <div class="code-block small">
+                <div class="code-header">
+                    <span>Install Fail2ban</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>apt install -y fail2ban
+systemctl enable --now fail2ban</code></pre>
+            </div>
+
+            <div class="highlight-card danger">
+                <h3>🚨 Atenção</h3>
+                <p>Sempre teste SSH em uma nova sessão antes de fechar a atual. Mudanças erradas podem te deixar sem acesso ao servidor.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CUSTOS -->
+        <section id="custos" class="content-section">
+            <h1>Análise de Custos</h1>
+            <p class="subtitle">Quanto custa hospedar 50-100 players?</p>
+
+            <h2>📊 Comparação de Custos</h2>
+            <div class="cost-comparison">
+                <div class="cost-card">
+                    <h3>🏠 Setup Básico</h3>
+                    <p class="cost-title">50 players - 1 VPS</p>
+                    <div class="cost-breakdown">
+                        <div class="cost-item">
+                            <span>VPS (4GB RAM)</span>
+                            <span>R$ 40-80/mês</span>
+                        </div>
+                        <div class="cost-item">
+                            <span>Domínio</span>
+                            <span>R$ 40/ano</span>
+                        </div>
+                    </div>
+                    <div class="cost-total">
+                        <span>Total</span>
+                        <span>~R$ 60/mês</span>
+                    </div>
+                </div>
+
+                <div class="cost-card">
+                    <h3>🏢 Setup Profissional</h3>
+                    <p class="cost-title">100 players - 2 VPS</p>
+                    <div class="cost-breakdown">
+                        <div class="cost-item">
+                            <span>VPS Panel (2GB)</span>
+                            <span>R$ 30-50/mês</span>
+                        </div>
+                        <div class="cost-item">
+                            <span>VPS Node (8GB)</span>
+                            <span>R$ 80-150/mês</span>
+                        </div>
+                        <div class="cost-item">
+                            <span>Backup Storage</span>
+                            <span>R$ 20-40/mês</span>
+                        </div>
+                    </div>
+                    <div class="cost-total">
+                        <span>Total</span>
+                        <span>~R$ 180/mês</span>
+                    </div>
+                    <div class="cost-note warning">
+                        💡 Inclui redundância e segurança
+                    </div>
+                </div>
+            </div>
+
+            <h2>📄 Guia Completo de Custos</h2>
+            <div class="download-card">
+                <h3>Baixe a análise detalhada</h3>
+                <p>Inclui cálculos para diferentes escalas e otimizações</p>
+                <a href="assets/pdfs/Guia_Custos_Hospedagem_Minecraft_50-100_BR.pdf" class="btn btn-primary" download>
+                    📥 Download PDF Custos
+                </a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: FAQ -->
+        <section id="faq" class="content-section">
+            <h1>Perguntas Frequentes</h1>
+            <p class="subtitle">Dúvidas comuns sobre Pterodactyl</p>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>❓ Preciso mesmo de 2 VPS?</h3>
+                    <p>Para produção profissional, sim. Separar Panel e Node aumenta segurança. Para testes, 1 VPS funciona.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>❓ Qual melhor OS?</h3>
+                    <p>Ubuntu 22.04 LTS é recomendado por estabilidade e suporte. Debian também funciona.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>❓ Posso usar Cloudflare?</h3>
+                    <p>Sim para o Panel (HTTP). Para Minecraft (TCP), use DNS only ou Spectrum (pago).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>❓ Como fazer backups?</h3>
+                    <p>Pterodactyl tem sistema de backups integrado. Para mais segurança, use backup externo automático.</p>
+                </div>
+            </div>
+
+            <h2>📖 Glossário</h2>
+            <div class="glossary">
+                <div class="glossary-item" data-term="Pterodactyl Panel">
+                    <strong>Panel</strong> - Interface web de gerenciamento
+                </div>
+                <div class="glossary-item" data-term="Wings">
+                    <strong>Wings</strong> - Daemon que executa containers
+                </div>
+                <div class="glossary-item" data-term="Egg">
+                    <strong>Egg</strong> - Template de servidor no Pterodactyl
+                </div>
+                <div class="glossary-item" data-term="Node">
+                    <strong>Node</strong> - Servidor físico/VPS que roda Wings
+                </div>
+                <div class="glossary-item" data-term="Allocation">
+                    <strong>Allocation</strong> - Porta/IP disponível para servidores
+                </div>
+                <div class="glossary-item" data-term="Velocity">
+                    <strong>Velocity</strong> - Proxy Minecraft moderno
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: MONITORAMENTO -->
+        <section id="monitoramento" class="content-section">
+            <h1>Monitoramento e Logs</h1>
+            <p class="subtitle">Mantenha tudo sob controle</p>
+
+            <h2>📈 Métricas Importantes</h2>
+            <ul>
+                <li>CPU usage (especialmente single-core)</li>
+                <li>RAM e swap</li>
+                <li>Disk I/O</li>
+                <li>Network traffic</li>
+                <li>TPS do Minecraft</li>
+            </ul>
+
+            <h2>🔍 Ferramentas Recomendadas</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>htop</h3>
+                    <p>Monitor de processos em tempo real</p>
+                    <div class="code-block small">
+                        <div class="code-header">
+                            <span>Install</span>
+                            <button class="copy-btn">Copiar</button>
+                        </div>
+                        <pre><code>apt install -y htop</code></pre>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>netdata</h3>
+                    <p>Dashboard completo de métricas</p>
+                </div>
+                <div class="card">
+                    <h3>Prometheus + Grafana</h3>
+                    <p>Solução profissional para monitoramento</p>
+                </div>
+            </div>
+
+            <div class="highlight-card tip">
+                <h3>💡 Dica</h3>
+                <p>Configure alertas para CPU > 90%, RAM > 85% e disk space < 20% livre.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: BACKUP -->
+        <section id="backup" class="content-section">
+            <h1>Backup e Recuperação</h1>
+            <p class="subtitle">Nunca perca seus dados</p>
+
+            <h2>💾 Tipos de Backup</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>O que inclui</th>
+                        <th>Frequência</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>World Backup</td>
+                        <td>Mundos e regiões</td>
+                        <td>Diário</td>
+                    </tr>
+                    <tr>
+                        <td>Config Backup</td>
+                        <td>Configurações e plugins</td>
+                        <td>Semanal</td>
+                    </tr>
+                    <tr>
+                        <td>Database Backup</td>
+                        <td>MySQL/MongoDB/Redis dumps</td>
+                        <td>Diário</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>🔄 Estratégia 3-2-1</h2>
+            <div class="highlight-card concept">
+                <h3>📌 Regra 3-2-1</h3>
+                <p>3 cópias dos dados, em 2 mídias diferentes, 1 offsite (fora do servidor principal).</p>
+            </div>
+
+            <h2>📦 Backup com rsync</h2>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>rsync example</span>
+                    <button class="copy-btn">Copiar</button>
+                </div>
+                <pre><code>rsync -avz /var/lib/pterodactyl/backup/ user@backup-server:/backups/pterodactyl/</code></pre>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: LINKS -->
+        <section id="links" class="content-section">
+            <h1>Links e Recursos Úteis</h1>
+            <p class="subtitle">Referências oficiais e ferramentas</p>
+
+            <div class="links-grid">
+                <div class="link-card">
+                    <h3>📚 Documentação</h3>
+                    <ul>
+                        <li><a href="https://pterodactyl.io/" target="_blank" rel="noopener noreferrer">Docs Oficiais Pterodactyl</a></li>
+                        <li><a href="https://github.com/pterodactyl/panel" target="_blank" rel="noopener noreferrer">GitHub Panel</a></li>
+                        <li><a href="https://github.com/pterodactyl/wings" target="_blank" rel="noopener noreferrer">GitHub Wings</a></li>
+                    </ul>
+                </div>
+
+                <div class="link-card">
+                    <h3>🎮 Minecraft</h3>
+                    <ul>
+                        <li><a href="https://velocitypowered.com/" target="_blank" rel="noopener noreferrer">Velocity</a></li>
+                        <li><a href="https://papermc.io/" target="_blank" rel="noopener noreferrer">PaperMC</a></li>
+                        <li><a href="https://www.spigotmc.org/" target="_blank" rel="noopener noreferrer">SpigotMC</a></li>
+                    </ul>
+                </div>
+
+                <div class="link-card">
+                    <h3>🔧 Ferramentas</h3>
+                    <ul>
+                        <li><a href="https://certbot.eff.org/" target="_blank" rel="noopener noreferrer">Certbot</a></li>
+                        <li><a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">Cloudflare</a></li>
+                        <li><a href="https://github.com/fail2ban/fail2ban" target="_blank" rel="noopener noreferrer">Fail2ban</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sidebar Direita -->
+    <aside class="sidebar-right">
+        <div class="toc-container">
+            <h3>Nesta Página</h3>
+            <ul id="toc-list"></ul>
+        </div>
+
+        <div class="quick-actions">
+            <h3>Ações Rápidas</h3>
+            <button class="quick-action-btn" id="btn-top">
+                ⬆️ Voltar ao Topo
+            </button>
+            <button class="quick-action-btn" id="btn-print">
+                🖨️ Imprimir Seção
+            </button>
+        </div>
+    </aside>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip" role="tooltip"></div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/tooltips.js"></script>
+    <script src="js/scrollspy.js"></script>
+</body>
+</html>
